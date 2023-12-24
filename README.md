@@ -27,7 +27,7 @@ Example scripts are provided in **example_use** folder.
 3. provide `world_sectors.json` manifest
 4. run `main.py` to generate `world_sectors_x.json` from provided files
 
-    > 2023.12.24: current total runtime: 878 seconds
+    > 2023.12.24: current total runtime: ~900 seconds
 
 5. _Optional_: run `preview_world_sectors.py` to check sector map for artifacts
 
