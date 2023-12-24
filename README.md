@@ -39,3 +39,10 @@ if they would not intersect with anything else.
 Shore lines can also be represented as straight line (union of original polygon and rectangle)
 3. **Voronoi Diagram** - Voronoi diagram allows to easily create _separation regions_, but it works for points only.
 Maybe it could be used for polygons too?
+4. **Tests**:
+   1. set of pairs `(coordinates, country_code)` that generated output should match;
+   2. The trickier the pairs (e.g. regions with mixed spots or irregular borders), the better testing set;
+   3. Basic testing would be to generate a net of points created from data_input, covering all land with assigned country code, 
+   but this testing would force specific accuracy (border irregularities beyond net width won't be detected)
+
+

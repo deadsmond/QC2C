@@ -3,6 +3,8 @@ from shapely.geometry import shape, Polygon, MultiPolygon, box
 from shapely.ops import unary_union
 from tqdm import tqdm
 import time
+import shutil
+from os import path
 
 
 def get_sector_grid(coordinates) -> list:
@@ -39,11 +41,6 @@ def get_map(input_file) -> list:
             # Reduce points in the Polygon
     return result
 
-
-def save_json(data, output_file):
-    # Save the results to json_reduced.json
-    with open(output_file, 'w') as output_file:
-        json.dump(data, output_file, separators=(',', ':'))
 
 
 def map_polygons_to_sectors(polygons, sectors) -> dict:
@@ -149,8 +146,9 @@ def simplify_polygons(polygons: list) -> dict:
 
 
 def save_sectors(assigned_polygons):
-    for sector_id, features in assigned_polygons.items():
-        save_json(features, sector_id)
+    for output_file, data in assigned_polygons.items():
+        with open(path.join(source_directory, 'data_output', output_file), 'w') as _:
+            json.dump(data, _, separators=(',', ':'))
 
 
 def remove_country_from_map(map_list: list, country: str) -> list:
@@ -160,16 +158,23 @@ def remove_country_from_map(map_list: list, country: str) -> list:
 
 # data source: https://datahub.io/core/geo-countries
 if __name__ == '__main__':
+    source_directory = path.dirname(path.abspath(__file__))
+
     # Record the start time
     run_start_time = time.time()
+
+    # copy world manifest to output
+    shutil.copy(path.join(source_directory, 'data_input', 'world_sectors.json'),
+                path.join(source_directory, 'data_output', 'world_sectors.json'))
+
     # Coordinates for sectors (min_x, min_y, max_x, max_y)
-    with open('world_sectors.json', 'r') as file:
+    with open(path.join(source_directory, 'data_input', 'world_sectors.json'), 'r') as file:
         world_sector_coordinates = json.load(file)
     world_sectors = get_sector_grid(world_sector_coordinates)
 
     # load geojson of all countries
-    world_map = get_map("countries.json")
-    usa_map = get_map("us_states.json")
+    world_map = get_map(path.join(source_directory, 'data_input', 'countries.json'))
+    usa_map = get_map(path.join(source_directory, 'data_input', 'us_states.json'))
 
     # Remove the item to be replaced from the first list
     world_map = remove_country_from_map(world_map, "USA")
