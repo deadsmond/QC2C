@@ -1,0 +1,4 @@
+shapely==2.0.2
+tqdm==4.66.1
+geopandas==0.10.2
+matplotlib==3.5.3
