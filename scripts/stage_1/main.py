@@ -42,7 +42,6 @@ def get_map(input_file) -> list:
     return result
 
 
-
 def map_polygons_to_sectors(polygons, sectors) -> dict:
     assigned_polygons = {sector['id']: [] for sector in sectors}
 
@@ -147,7 +146,7 @@ def simplify_polygons(polygons: list) -> dict:
 
 def save_sectors(assigned_polygons):
     for output_file, data in assigned_polygons.items():
-        with open(path.join(source_directory, 'data_output', output_file), 'w') as _:
+        with open(path.join(source_directory, '../../data/output/stage_1', output_file), 'w') as _:
             json.dump(data, _, separators=(',', ':'))
 
 
@@ -164,17 +163,17 @@ if __name__ == '__main__':
     run_start_time = time.time()
 
     # copy world manifest to output
-    shutil.copy(path.join(source_directory, 'data_input', 'world_sectors.json'),
-                path.join(source_directory, 'data_output', 'world_sectors.json'))
+    shutil.copy(path.join(source_directory, '../../data/input', 'world_sectors.json'),
+                path.join(source_directory, '../../data/output/stage_1', 'world_sectors.json'))
 
     # Coordinates for sectors (min_x, min_y, max_x, max_y)
-    with open(path.join(source_directory, 'data_input', 'world_sectors.json'), 'r') as file:
+    with open(path.join(source_directory, '../../data/input', 'world_sectors.json'), 'r') as file:
         world_sector_coordinates = json.load(file)
     world_sectors = get_sector_grid(world_sector_coordinates)
 
     # load geojson of all countries
-    world_map = get_map(path.join(source_directory, 'data_input', 'countries.json'))
-    usa_map = get_map(path.join(source_directory, 'data_input', 'us_states.json'))
+    world_map = get_map(path.join(source_directory, '../../data/input', 'countries.json'))
+    usa_map = get_map(path.join(source_directory, '../../data/input', 'us_states.json'))
 
     # Remove the item to be replaced from the first list
     world_map = remove_country_from_map(world_map, "USA")
