@@ -33,12 +33,12 @@ Example scripts are provided in **example_use** folder.
 
 # Roadmap:
 1. **Shore Line Reduction**: sea borders can be greatly reduced, 
-but this requires iteration through points - which is time-consuming
+but this requires iteration through points; **coming in stage 2**
 2. **Rectangularization x Triangulation** - islands can be represented as squares or triangles, 
 if they would not intersect with anything else. 
 Shore lines can also be represented as straight line (union of original polygon and rectangle)
 3. **Voronoi Diagram** - Voronoi diagram allows to easily create _separation regions_, but it works for points only.
-Maybe it could be used for polygons too?
+Maybe it could be used for polygons too? ; **coming in stage 3**
 4. **Tests**:
    1. set of pairs `(coordinates, country_code)` that generated output should match;
    2. The trickier the pairs (e.g. regions with mixed spots or irregular borders), the better testing set;
