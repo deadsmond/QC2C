@@ -3,14 +3,17 @@ import matplotlib.pyplot as plt
 from shapely.geometry import Polygon
 import json
 import random
+from os import path
 
 if __name__ == '__main__':
+    source_directory = path.dirname(path.abspath(__file__))
+
     sector = 2
     # Load the world map data
     world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
 
     # Define a list of polygons with coordinates, colors, and labels
-    with open(f'world_sector_{sector}.json', 'r') as file:
+    with open(path.join(source_directory, '../data/output/stage_1', f'world_sector_{sector}.json'), 'r') as file:
         countries = json.load(file)
 
     # Create a GeoDataFrame with the polygons
