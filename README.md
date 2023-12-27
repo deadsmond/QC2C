@@ -31,6 +31,13 @@ Example scripts are provided in **example_use** folder.
 
 5. _Optional_: run `preview_world_sectors.py` to check sector map for artifacts
 
+# Politics
+1. This project is NOT a political matter
+2. We do NOT move borders or decide which land belongs to whom
+3. _QC2C_ is **offline approximation** and **WORKS ONLY ON LAND - sea borders are not supported!**
+4. If you do not agree with provided borders, don't use it! Make your own or something. 
+5. Keep your political views out of discussions, commits and merge requests.
+
 # Roadmap:
 1. **Shore Line Reduction**: sea borders can be greatly reduced, 
 but this requires iteration through points; **coming in stage 2**
@@ -40,6 +47,7 @@ Shore lines can also be represented as straight line (union of original polygon 
 3. **Voronoi Diagram** - Voronoi diagram allows to easily create _separation regions_, but it works for points only.
 Maybe it could be used for polygons too? ; **coming in stage 3**
 4. **Tests**:
+   0. **Verify output against input data - all coordinates assigned to input coutry should be part of it in output!**
    1. set of pairs `(coordinates, country_code)` that generated output should match;
    2. The trickier the pairs (e.g. regions with mixed spots or irregular borders), the better testing set;
    3. Basic testing would be to generate a net of points created from data_input, covering all land with assigned country code, 
