@@ -4,20 +4,26 @@ from shapely.geometry import Polygon
 import json
 import random
 from os import path
+import gzip
 
 if __name__ == '__main__':
     source_directory = path.dirname(path.abspath(__file__))
 
     # select preview
-    stage = 2
+    stage = 3
     sector = 1
 
     # Load the world map data
     world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
 
-    # Define a list of polygons with coordinates, colors, and labels
-    with open(path.join(source_directory, f'../data/output/stage_{stage}', f'world_sector_{sector}.json'), 'r') as file:
-        countries = json.load(file)
+    if stage >= 3:
+        with gzip.open(path.join(source_directory, f'../data/output/stage_{stage}', f'world_sector_{sector}.json.gz'),
+                       'rt') as gz_file:
+            countries = json.load(gz_file)
+    else:
+        with open(path.join(source_directory, f'../data/output/stage_{stage}', f'world_sector_{sector}.json'),
+                  'r') as file:
+            countries = json.load(file)
 
     # Create a GeoDataFrame with the polygons
     polygons = []
