@@ -16,6 +16,7 @@ if __name__ == '__main__':
     # Load the world map data
     world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
 
+    # after stage 3 files are compressed with gzip!
     if stage >= 3:
         with gzip.open(path.join(source_directory, f'../data/output/stage_{stage}', f'world_sector_{sector}.json.gz'),
                        'rt') as gz_file:
