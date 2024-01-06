@@ -11,6 +11,14 @@ Approximate borders were created in `main.py` with:
 
 - convex hull of a country
 - `geometry.simplify` to reduce amount of points
+- multiple iterations to remove unnecessary border points with smoothed curves
+
+## Compression
+Results were compressed with `gzip` to reduce files size and make them accessible for `javascript` applications, 
+as browsers have native support for this compression algorithm. 
+
+It is possible that other compression algorithms (such as `Brotli`) would provide smaller size, 
+but they are not standard yet.
 
 # How to use
 
@@ -31,6 +39,8 @@ Example scripts are provided in **example_use** folder.
 
 5. _Optional_: run `preview_world_sectors.py` to check sector map for artifacts
 
+> stages 3+ produce `.json.gz` files!
+
 # Politics
 1. This project is NOT a political matter
 2. We do NOT move borders or decide which land belongs to whom
@@ -39,8 +49,9 @@ Example scripts are provided in **example_use** folder.
 5. Keep your political views out of discussions, commits and merge requests.
 
 # Roadmap:
-1. **Shore Line Reduction**: sea borders can be greatly reduced, 
-but this requires iteration through points; **coming in stage 2**
+1. ~~**Shore Line Reduction**: sea borders can be greatly reduced, 
+but this requires iteration through points; **coming in stage 2**~~
+
 2. **Rectangularization x Triangulation** - islands can be represented as squares or triangles, 
 if they would not intersect with anything else. 
 Shore lines can also be represented as straight line (union of original polygon and rectangle)

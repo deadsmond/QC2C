@@ -10,7 +10,7 @@ if __name__ == '__main__':
     source_directory = path.dirname(path.abspath(__file__))
 
     # select preview
-    stage = 3
+    stage = 4
     sector = 1
 
     # Load the world map data
