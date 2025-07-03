@@ -5,7 +5,23 @@ import { LatLng } from "leaflet";
 import pointInPolygon from "point-in-polygon";
 
 // Define the name of the manifest file containing global sector boundaries
-const WORLD_SECTOR_MANIFEST = "world_sectors.json";
+import worldSectorManifest from "./data/json/world_sectors.json";
+export { worldSectorManifest };
+
+import sector1 from "./data/json/world_sector_1.json";
+import sector2 from "./data/json/world_sector_2.json";
+import sector3 from "./data/json/world_sector_3.json";
+import sector4 from "./data/json/world_sector_4.json";
+import sector5 from "./data/json/world_sector_5.json";
+import sector6 from "./data/json/world_sector_6.json";
+export const sectorData = {
+  sector1,
+  sector2,
+  sector3,
+  sector4,
+  sector5,
+  sector6,
+};
 
 /**
  * Find which sector a coordinate falls into based on bounding boxes.
@@ -17,7 +33,7 @@ const WORLD_SECTOR_MANIFEST = "world_sectors.json";
  * @param coordinates - Coordinates as LatLng object.
  * @returns Sector key string if found; otherwise null.
  */
-const getSector = (
+export const getSector = (
   sectors_manifest: object,
   coordinates: LatLng
 ): string | null => {
@@ -52,7 +68,7 @@ const getSector = (
  * @param coordinates - Coordinates as LatLng object.
  * @returns Country key string if found; otherwise null.
  */
-const getCountry = (
+export const getCountry = (
   sector_manifest: object,
   coordinates: LatLng
 ): string | null => {
@@ -77,19 +93,25 @@ const getCountry = (
  * Fetch the world sector manifest to determine the sector, then fetch the
  * sector polygon data to identify the specific country polygon containing the coordinate.
  *
+ * This is just a premade workflow to show how to operate the functions: getSector, getCountry.
+ *
  * @param coordinates - Coordinates as LatLng object.
  * @returns Promise resolving to country key string if found; otherwise null.
  */
 export const coordinatesToCountry = async (
-  coordinates: LatLng
+  coordinates: LatLng,
+  urls = {
+    manifest: "/",
+    sectors: "/",
+  }
 ): Promise<string | null> => {
   try {
     // Fetch the world sector manifest file
-    let response = await fetch(`/${WORLD_SECTOR_MANIFEST}`);
+    let response = await fetch(urls.manifest);
 
     // Throw error if request fails
     if (!response.ok) {
-      throw new Error(`Failed to get ${WORLD_SECTOR_MANIFEST}`);
+      throw new Error(`Failed to get manifest from ${urls.manifest}`);
     }
 
     // Parse the sector manifest JSON
@@ -99,11 +121,11 @@ export const coordinatesToCountry = async (
     const sector = getSector(data, coordinates);
 
     // Fetch the sector-specific polygon data
-    response = await fetch(`/${sector}`);
+    response = await fetch(`${urls.sectors}/${sector}`);
 
     // Throw error if request fails
     if (!response.ok) {
-      throw new Error(`Failed to get ${sector}`);
+      throw new Error(`Failed to get ${sector} from ${urls.sectors}`);
     }
 
     // Parse the sector polygon data
