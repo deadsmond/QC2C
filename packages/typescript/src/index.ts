@@ -4,25 +4,6 @@ import { LatLng } from "leaflet";
 // Import point-in-polygon utility to check if a point lies inside a polygon
 import pointInPolygon from "point-in-polygon";
 
-// Define the name of the manifest file containing global sector boundaries
-import worldSectorManifest from "./data/json/world_sectors.json";
-export { worldSectorManifest };
-
-import sector1 from "./data/json/world_sector_1.json";
-import sector2 from "./data/json/world_sector_2.json";
-import sector3 from "./data/json/world_sector_3.json";
-import sector4 from "./data/json/world_sector_4.json";
-import sector5 from "./data/json/world_sector_5.json";
-import sector6 from "./data/json/world_sector_6.json";
-export const sectorData = {
-  sector1,
-  sector2,
-  sector3,
-  sector4,
-  sector5,
-  sector6,
-};
-
 /**
  * Find which sector a coordinate falls into based on bounding boxes.
  *
