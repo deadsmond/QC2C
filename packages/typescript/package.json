@@ -2,21 +2,6 @@
   "name": "qc2c",
   "version": "1.0.1",
   "description": "Map coordinates to country using sectorized geojson strategy",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsc && cpx 'src/**/*.json' dist"
-  },
-  "dependencies": {
-    "cpx": "^1.5.0",
-    "leaflet": "^1.9.4",
-    "point-in-polygon": "^1.0.1"
-  },
-  "devDependencies": {
-    "@types/leaflet": "^1.9.19",
-    "@types/point-in-polygon": "^1.1.5",
-    "typescript": "^5.4.0"
-  },
   "keywords": [
     "geo",
     "coordinates",
@@ -24,6 +9,32 @@
     "map",
     "leaflet"
   ],
+  "homepage": "https://github.com/deadsmond/HumanShortCode/tree/master/javascript#readme",
+  "bugs": {
+    "url": "https://github.com/deadsmond/QC2C/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deadsmond/QC2C.git"
+  },
+  "license": "MIT",
   "author": "Adam Lewicki",
-  "license": "MIT"
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc && cpx 'src/**/*.json' dist",
+    "test": "jest"
+  },
+  "dependencies": {
+    "cpx": "^1.5.0",
+    "jest": "^30.0.4",
+    "leaflet": "^1.9.4",
+    "point-in-polygon": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.19",
+    "@types/point-in-polygon": "^1.1.5",
+    "typescript": "^5.4.0"
+  }
 }
