@@ -3,25 +3,17 @@
   "version": "1.0.1",
   "description": "Map coordinates to country using sectorized geojson strategy",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "echo \"No build step for pure JS\""
   },
   "dependencies": {
-    "leaflet": "^1.9.4",
     "point-in-polygon": "^1.0.1"
-  },
-  "devDependencies": {
-    "@types/leaflet": "^1.9.19",
-    "@types/point-in-polygon": "^1.1.5",
-    "typescript": "^5.4.0"
   },
   "keywords": [
     "geo",
     "coordinates",
     "country",
-    "map",
-    "leaflet"
+    "map"
   ],
   "author": "Adam Lewicki",
   "license": "MIT"
