@@ -1,8 +1,8 @@
 // general react imports
-import { LatLng } from 'leaflet';
-import pointInPolygon from 'point-in-polygon';
+import { LatLng } from "leaflet";
+import pointInPolygon from "point-in-polygon";
 
-const WORLD_SECTOR_MANIFEST = 'world_sectors.json';
+const WORLD_SECTOR_MANIFEST = "world_sectors.json";
 
 const getSector = (sectors_manifest: object, coordinates: LatLng) => {
   for (const [key, bounds] of Object.entries(sectors_manifest)) {
@@ -29,7 +29,9 @@ const getCountry = (sector_manifest: object, coordinates: LatLng) => {
   return null;
 };
 
-export const coordinatesToCountry = async (coordinates: LatLng): Promise<string | null> => {
+export const coordinatesToCountry = async (
+  coordinates: LatLng
+): Promise<string | null> => {
   try {
     // get world sectors
     let response = await fetch(`/${WORLD_SECTOR_MANIFEST}`);
@@ -47,7 +49,7 @@ export const coordinatesToCountry = async (coordinates: LatLng): Promise<string 
     // get correct country within sector
     return getCountry(data, coordinates);
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error("Error fetching data:", error);
     return null;
   }
 };
