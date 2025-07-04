@@ -1,5 +1,8 @@
-shapely==2.0.2
-tqdm==4.66.1
-geopandas==0.10.2
-matplotlib==3.5.3
-JSON-minify==0.3.0
+# No external dependencies required
+# Built-in Python only
+
+# for deployment
+build
+setuptools
+wheel
+twine

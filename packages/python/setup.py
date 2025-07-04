@@ -12,13 +12,7 @@ setup(
     url="https://github.com/deadsmond/QC2C",
     author="Adam Lewicki",
     packages=find_packages(),
-    install_requires=[
-        "shapely==2.0.2",
-        "tqdm==4.66.1",
-        "geopandas==0.10.2",
-        "matplotlib==3.5.3",
-        "JSON-minify==0.3.0",
-    ],
+    install_requires=[],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

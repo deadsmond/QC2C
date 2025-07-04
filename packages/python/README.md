@@ -1,7 +1,6 @@
-# Quick Coordinates To Country - QC2C
+# Quick Coordinates To Country (QC2C)
 
-Quick Coordinates To Country (QC2C) provides fast and (mostly) offline country check,
-based on provided coordinates.
+QC2C is a package that provides fast, offline country lookup based on geographic coordinates.
 
 ## About
 
@@ -15,7 +14,40 @@ Approximate borders were created in `main.py` with:
 - `geometry.simplify` to reduce amount of points
 - multiple iterations to remove unnecessary border points with smoothed curves
 
-## Compression
+### Features
+
+- Approximate offline country lookup using coordinates
+- Sectorized approach for performance and scalability
+- Uses ISO Alpha-3 country codes for outputs
+- Supports gzip-compressed JSON data for efficient loading
+- Pure Python implementation for easy integration
+
+### Limitations
+
+- Works only on land coordinates; sea borders are not supported
+- Borders are approximate and simplified for performance
+- Not intended for political or legal use
+
+## Implementation
+
+### Package Contents
+
+- **core.py**  
+  Core logic for:
+  - Determining which sector a coordinate falls into (`get_sector`)
+  - Identifying the country within a sector (`get_country`)
+  - Checking if a point lies inside a polygon (`point_in_polygon`)
+
+- **main.py**  
+  Script to generate approximate country border data by:
+  - Computing convex hulls of countries
+  - Simplifying geometries to reduce points
+  - Iteratively smoothing borders to remove artifacts
+
+- **world_sectors.json** and **world_sectors_x.json**  
+  Manifest files defining geographic sectors for faster coordinate lookup.
+
+### Compression
 
 Results were compressed with `gzip` to reduce files size and make them accessible for `javascript` applications,
 as browsers have native support for this compression algorithm.
@@ -23,7 +55,7 @@ as browsers have native support for this compression algorithm.
 It is possible that other compression algorithms (such as `Brotli`) would provide smaller size,
 but they are not standard yet.
 
-## How to use
+### How to use
 
 1. host world + sectors manifests on the web or add them to your project
 2. Check which sector contains coordinates data
@@ -54,15 +86,15 @@ Example scripts are provided in **example_use** folder.
 
 ## Roadmap
 
-1. ~~**Shore Line Reduction**: sea borders can be greatly reduced,
-but this requires iteration through points; **coming in stage 2**~~
+- Improved shoreline simplification and polygon triangulation:
+  - sea borders can be greatly reduced
+  - shore lines can also be represented as straight line (union of original polygon and rectangle))
+- islands reduction:
+  - islands can be represented as squares or triangles, if they would not intersect with anything else
+- Voronoi diagram based region separation
+  - best for optimizing islands and shorelines
+- Tests:
 
-2. **Rectangularization x Triangulation** - islands can be represented as squares or triangles,
-if they would not intersect with anything else.
-Shore lines can also be represented as straight line (union of original polygon and rectangle)
-3. **Voronoi Diagram** - Voronoi diagram allows to easily create _separation regions_, but it works for points only.
-Maybe it could be used for polygons too? ; **coming in stage 3**
-4. **Tests**:
    0. **Verify output against input data - all coordinates assigned to input coutry should be part of it in output!**
    1. set of pairs `(coordinates, country_code)` that generated output should match;
    2. The trickier the pairs (e.g. regions with mixed spots or irregular borders), the better testing set;
